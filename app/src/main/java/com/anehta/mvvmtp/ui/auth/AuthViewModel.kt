@@ -2,6 +2,7 @@ package com.anehta.mvvmtp.ui.auth
 
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.anehta.mvvmtp.data.repositories.UserRepositories
 
 class AuthViewModel : ViewModel(){
 
@@ -16,8 +17,9 @@ class AuthViewModel : ViewModel(){
             authListener?.onFailure("Invalid email or password")
             return
         }
-        authListener?.onSuccess()
-        //success
+        //authListener?.onSuccess(loginResponse)
 
+        val loginResponse = UserRepositories().userLogin(email!!, password!!)
+        authListener?.onSuccess(loginResponse)
     }
 }
